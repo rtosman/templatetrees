@@ -11,8 +11,8 @@
 // or implied warranty.
 //
 
-#ifndef INCLUDED_STL_ITERATOR_TRAITS
-#define INCLUDED_STL_ITERATOR_TRAITS
+#ifndef _USERS_RENNIE_TEST_TEMPLATETREES_STL_ITERATOR_TRAITS_HPP
+#define _USERS_RENNIE_TEST_TEMPLATETREES_STL_ITERATOR_TRAITS_HPP
 
 #include "pred_expr.hpp"
 #include <iterator>
@@ -25,7 +25,7 @@ namespace DandS {
 	inline namespace STL_ITERATOR_TRAITS_IMPL {
 		template <bool c>
 		using is_true = std::conditional_t<c, std::true_type, std::false_type>;
-	}
+	} // namespace STL_ITERATOR_TRAITS_IMPL
 
 	template <typename It>
 	using Category
@@ -80,6 +80,6 @@ namespace DandS {
 	using is_out = is_true<is_exactly_out<It>::value || is_for<It>::value>;
 	constexpr auto isOut = pred<is_out>();
 	using IsOut = decltype(isOut);
-}
+} // namespace DandS
 
 #endif

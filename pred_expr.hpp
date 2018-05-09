@@ -11,11 +11,11 @@
 // or implied warranty.
 //
 
-#ifndef INCLUDED_PRED_EXPR
-#define INCLUDED_PRED_EXPR
+#ifndef _USERS_RENNIE_TEST_TEMPLATETREES_PRED_EXPR_HPP
+#define _USERS_RENNIE_TEST_TEMPLATETREES_PRED_EXPR_HPP
 
-#include <type_traits>
 #include <cstddef>
+#include <type_traits>
 
 //
 // Facility to create a compile-time abstract syntax tree (AST) that
@@ -71,7 +71,7 @@ namespace DandS {
 		//
 		template <typename... Ts>
 		using all_PAST = all_derived_from<PAST, Ts...>;
-	}
+	}  // namespace ASTImplementation
 
 	//
 	// The language consists of type predicate leaves
@@ -238,6 +238,6 @@ namespace DandS {
 	//
 	template <size_t> struct Ignore {};
 	constexpr bool ignore(size_t) { return true; }
-}
+}  // namespace DandS
 
 #endif

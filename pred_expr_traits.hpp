@@ -11,8 +11,8 @@
 // or implied warranty.
 //
 
-#ifndef INCLUDED_PRED_EXPR_TRAITS
-#define INCLUDED_PRED_EXPR_TRAITS
+#ifndef _USERS_RENNIE_TEST_TEMPLATETREES_PRED_EXPR_TRAITS_HPP
+#define _USERS_RENNIE_TEST_TEMPLATETREES_PRED_EXPR_TRAITS_HPP
 
 #include "pred_expr.hpp"
 #include <type_traits>
@@ -120,6 +120,6 @@ namespace DandS {
 	constexpr auto isNothrowDestructible = pred<std::is_nothrow_destructible>();
 	using IsNothrowDestructible = decltype(isNothrowDestructible);
 
-}
+} // namespace DandS
 
 #endif

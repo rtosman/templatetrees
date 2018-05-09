@@ -10,8 +10,8 @@
 // software for any purpose. It is provided "as is" without express
 // or implied warranty.
 //
-#ifndef INCLUDED_SHAPE
-#define INCLUDED_SHAPE
+#ifndef _USERS_RENNIE_TEST_TEMPLATETREES_SHAPE_H
+#define _USERS_RENNIE_TEST_TEMPLATETREES_SHAPE_H
 
 class ShapeBase {};
 
@@ -29,7 +29,7 @@ public:
 
 class Circle : public Shape, public Rollable {
 public:
-    Circle() {}
+    Circle() = default;
 	void draw() const override {}
 	void roll() override {}
 };
@@ -39,10 +39,10 @@ class Square : public Shape {
 
 class Triangle : public Shape {
 public:
-    Triangle() {}
+    Triangle() = default;
 	void draw() const override {}
 private:
-	int a_;
+	int a_{};
 };
 
 #endif

@@ -17,12 +17,13 @@
 
 #include "shape.h"
 
-#include <iostream>
 #include <exception>
-#include <type_traits>
+#include <iostream>
 #include <list>
-#include <vector>
+#include <type_traits>
 #include <typeinfo>
+#include <vector>
+
 
 namespace DandS {
 	//
@@ -153,7 +154,7 @@ namespace DandS {
 
 	class WhatImpl {
 	public:
-		virtual ~WhatImpl() {}
+		virtual ~WhatImpl() = default;
 	};
 
 	template <typename T>
@@ -164,26 +165,26 @@ namespace DandS {
 		//
 		// Class interface use #1: tame greedy universal
 		//     Only call universal version if S is "not similar" to T
-		void doit(T const &a) { std::cout << "What::doit(lvalue): " << typeid(T).name() << std::endl; }
-		void doit(T &&a) { std::cout << "What::doit(rvalue): " << typeid(T).name() << std::endl; }
+		void doit(T const & /*a*/) { std::cout << "What::doit(lvalue): " << typeid(T).name() << std::endl; }
+		void doit(T && /*a*/) { std::cout << "What::doit(rvalue): " << typeid(T).name() << std::endl; }
 
 		using NotSimilarToT = decltype(!bind2nd<are_similar, T>());
 		template <typename S, typename = Constraint<NotSimilarToT, S>>
-		void doit(S &&a) { std::cout << "What::doit(universal): " << typeid(S).name() << std::endl; }
+		void doit(S && /*a*/) { std::cout << "What::doit(universal): " << typeid(S).name() << std::endl; }
 
 		//
 		// Class interface use #2: distinguish on secondary properties of args in an overload.
 		//    Distinguish different stl iterator categories from each other and from raw pointers.
 		template <typename In, typename = Constraint<decltype(isIn & !isRand), In>>
-		What(In b, In e) { std::cout << "What::What(In, In)" << std::endl; }
+		What(In  /*b*/, In  /*e*/) { std::cout << "What::What(In, In)" << std::endl; }
 
 		// Note that we have to add trailing default to allow member overload!
 		// Here we're using Ignore, but any type will do.
 		template <typename Rand, typename = Constraint<decltype(isRand & !isPointer), Rand>, typename = Ignore<1>>
-		What(Rand b, Rand e) { std::cout << "What::What(Rand, Rand)" << std::endl; }
+		What(Rand  /*b*/, Rand  /*e*/) { std::cout << "What::What(Rand, Rand)" << std::endl; }
 
 		template <typename Ptr, typename = Constraint<IsPointer, Ptr>, typename = Ignore<1>, typename = Ignore<2>>
-		What(Ptr b, Ptr e) { std::cout << "What::What(Ptr, Ptr)" << std::endl; }
+		What(Ptr  /*b*/, Ptr  /*e*/) { std::cout << "What::What(Ptr, Ptr)" << std::endl; }
 
 		//
 		// Class interface use #3: distinguish on secondary properties of args in an overload.
@@ -191,14 +192,14 @@ namespace DandS {
 		// to use decltype).
 		//
 		template <typename In, bool = constraint<In>(isIn & !isRand)>
-		void f(In b, In e) const { std::cout << "What::f(In, In)" << std::endl; }
+		void f(In  /*b*/, In  /*e*/) const { std::cout << "What::f(In, In)" << std::endl; }
 
 		// Have to add trailing default!  Here we're getting creative...
 		template <typename Rand, bool = constraint<Rand>(isRand & !isPointer), typename = Ignore<1>>
-		void f(Rand b, Rand e) const { std::cout << "What::f(Rand, Rand)" << std::endl; }
+		void f(Rand  /*b*/, Rand  /*e*/) const { std::cout << "What::f(Rand, Rand)" << std::endl; }
 
 		template <typename Ptr, bool = constraint<Ptr>(isPointer), bool = ignore(1)>
-		void f(Ptr b, Ptr e) const { std::cout << "What::f(Ptr, Ptr)" << std::endl; }
+		void f(Ptr  /*b*/, Ptr  /*e*/) const { std::cout << "What::f(Ptr, Ptr)" << std::endl; }
 
 		//
 		// Use #4:  add a constraint to an interface.
@@ -265,7 +266,7 @@ namespace DandS {
 		cout << "Should be universal: ";
 		wt.doit(1234);
 		cout << "Should be universal: ";
-		double *pd = 0;
+		double *pd = nullptr;
 		wt.doit(pd);
 
 		cout << "Should be signed: ";
@@ -341,7 +342,7 @@ namespace DandS {
 		cout << "unsigned long long is too_complex (true): " << boolalpha << r6 << endl;
 	}
 
-}
+} // namespace DandS
 
 template <typename T>
 void test_binders() {
