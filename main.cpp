@@ -11,9 +11,9 @@
 // or implied warranty.
 //
 
-#include "pred_expr.h"
-#include "pred_expr_traits.h"
-#include "stl_iterator_traits.h"
+#include "pred_expr.hpp"
+#include "pred_expr_traits.hpp"
+#include "stl_iterator_traits.hpp"
 
 #include "shape.h"
 
