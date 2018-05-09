@@ -14,7 +14,7 @@
 #ifndef INCLUDED_STL_ITERATOR_TRAITS
 #define INCLUDED_STL_ITERATOR_TRAITS
 
-#include "pred_expr.h"
+#include "pred_expr.hpp"
 #include <iterator>
 #include <type_traits>
 

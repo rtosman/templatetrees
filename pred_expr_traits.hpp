@@ -14,7 +14,7 @@
 #ifndef INCLUDED_PRED_EXPR_TRAITS
 #define INCLUDED_PRED_EXPR_TRAITS
 
-#include "pred_expr.h"
+#include "pred_expr.hpp"
 #include <type_traits>
 
 // Convenience representation of standard type traits as AST ids.
