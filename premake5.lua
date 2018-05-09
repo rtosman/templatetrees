@@ -9,7 +9,7 @@ project "Demonstrator"
    buildoptions { "-std=c++17" }
    targetdir "bin/%{cfg.buildcfg}"
 
-   files { "**.h", "**.cpp" }
+   files { "**.h", "*.hpp", "**.cpp" }
 
    filter "configurations:Debug"
       defines { "DEBUG" }
